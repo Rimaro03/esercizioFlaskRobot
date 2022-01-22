@@ -1,0 +1,2 @@
+app.route() ==> socketio.route
+aggiungere grafico
