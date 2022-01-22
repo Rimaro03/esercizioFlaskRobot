@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.4/raphael-min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/justgage/1.2.9/justgage.min.js"></script>
-    <link rel="stylesheet" href="../style/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../static/style.css">
     <title>Document</title>
 </head>
 <body>
@@ -22,13 +23,7 @@
     </div>
     
     <script>
-        function httpGet(theUrl)
-        {
-            var xmlHttp = new XMLHttpRequest();
-            xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
-            xmlHttp.send( null );
-            return xmlHttp.responseText;
-        }
+        var socket = io();
 
         document.addEventListener("DOMContentLoaded", function(event) {      
             var g1 = new JustGage({
@@ -63,10 +58,11 @@
             g2.relativeGaugeSize = false;
 
             setInterval(() => {
-                let datas = httpGet("http://127.0.0.1:4321/getData")
-                let data = JSON.parse(datas)
-                g1.refresh(data['temp']);
-                g2.refresh(data.umi);  
+                socket.emit('getData')
+                socket.on('response', function(data) {
+                    g1.refresh(data.temp);
+                    g2.refresh(data.umi);  
+                });
             }, 2000)
         });
     </script>
