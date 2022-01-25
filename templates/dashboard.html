@@ -80,7 +80,8 @@
       socket.on("response", function (dati) {
         let labels = [];
         dati.timestamp.forEach(element => {
-          labels.push(`${new Date(element).getDay()}/${new Date(element).getMonth()}`)
+          labels.push(`${new Date(element).getDate()}/${new Date(element).getMonth()+1}`);
+          console.log(element);
         });
         console.log(labels);
         const data = {
