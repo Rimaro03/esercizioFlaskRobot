@@ -78,7 +78,11 @@
     <script>
       socket.emit("getMoreData");
       socket.on("response", function (dati) {
-        const labels = dati.timestamp;
+        let labels = [];
+        dati.timestamp.forEach(element => {
+          labels.push(`${new Date(element).getDay()}/${new Date(element).getMonth()}`)
+        });
+        console.log(labels);
         const data = {
           labels: labels,
           datasets: [
