@@ -9,15 +9,31 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>CENTRO DI CONTROLLO</h1>
-
-    <button onclick="publish('avanti')">avanti</button>
-    <button onclick="publish('indietro')">indietro</button>
-    <button onclick="publish('alza')">alza braccio</button>
-    <button onclick="publish('abbassa')">abbassa braccio</button>
-    <button onclick="publish('apri')">apri morsa</button>
-    <button onclick="publish('chiudi')">chiudi morsa</button>
-
+    <div class="title">
+        <h1>CENTRO DI CONTROLLO</h1>
+    </div>
+    <div class="container">
+        <div class="images">
+            <img src="../static/8zlmfvza.bmp" alt="Image not found!" class="robot">
+        </div>
+        <div class="buttons">
+            <div class="movementButtons divButtons">
+                <h3 class="buttonDivTitle">MOVIMENTO</h3>
+                <a href="#" class="button" onclick="publish('avanti')">AVANTI</a>
+                <a href="#" class="button" onclick="publish('indietro')">INDIETRO</a>
+            </div>
+            <div class="armButtons divButtons">
+                <h3 class="buttonDivTitle">BRACCIO</h3>
+                <a href="#" class="button" onclick="publish('alza')">ALZA</a>
+                <a href="#" class="button" onclick="publish('abbassa')">ABBASSA</a>
+            </div>
+            <div class="clampButtons divButtons">
+                <h3 class="buttonDivTitle">MORSA</h3>
+                <a href="#" class="button" onclick="publish('apri')">APRI</a>
+                <a href="#" class="button" onclick="publish('chidi')">CHIUDI</a>
+            </div>
+        </div>
+    </div>
 
     <script>
         var socket = io();
@@ -25,6 +41,5 @@
             socket.emit('publish', {message: azione, topic: "rasp1/comandi"})
         }
     </script>
-
 </body>
 </html>
