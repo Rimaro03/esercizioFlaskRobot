@@ -3,13 +3,36 @@ body{
     height: 100%;
 }
 
+li:hover{
+    background-color: #0052ce;
+}
+
 .title h1 {
-    font-size: 2.5em;
+    font-size: 2.7em;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    margin: 2%;
+    padding: 2%;
+    font-family: 'Roboto', sans-serif;
+}
+
+ul{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.sx{
+    display: flex;
+    flex-direction: row;
+}
+
+h3{
+    font-size: 1.3em;
     color: rgb(0, 0, 0);
     text-align: center;
     margin: 2%;
     font-family: 'Roboto', sans-serif;
-
 }
 
 .container{
@@ -20,52 +43,18 @@ body{
     justify-content: space-around;
 }
 
-.images{
-    max-width: 65%;
-    max-height: 100%;
-    border-radius: 10px;
-}
-
-img.robot{
-    max-width: 100%;
-    max-height: 100%;
-}
-
 .buttons{
-    width: 30%;
-    border-radius: 10px;
+    width: 100%;
+    height: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-around;
     align-items: center;
 }
 
 .divButtons{
-    border-radius: 10px;
-    height: auto;
-}
-
-.button{
-    text-decoration: none;
-    color: black;
-    font-size: 20px;
-    font-family: 'Roboto', sans-serif;
-    border: 1px solid black;
-    border-radius: 10px;
-    padding: 10px;
-    margin: 10px;
-    background-color: white;
-}
-
-.button:hover{
-    background-color: black;
-    color: white;
-    transition: 0.5s;
-}   
-
-.buttonDivTitle{
-    font-family: 'Roboto', sans-serif;
-    text-align: center;
-    margin: 10px;
-    padding: 10%;
+    padding: 2%;
+    margin-top: 5%;
+    border: 1px solid #0d6efd;
+    border-radius: 5px;
 }
