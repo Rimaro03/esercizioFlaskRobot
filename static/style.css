@@ -58,3 +58,13 @@ h3{
     border: 1px solid #0d6efd;
     border-radius: 5px;
 }
+
+@media screen and (max-width: 600px) {
+    .buttons{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10%;
+    }
+  }
