@@ -1,65 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../static/style.css">
-    <title>Document</title>a
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
+      integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="../static/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container-fluid">
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <div class="sx">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Centro di Controllo</a>
-                      </li>
-                </div>
-              <div class="dx">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="https://github.com/Rimaro03/esercizioFlaskRobot">GitHub <img src="https://github.githubassets.com/favicons/favicon.png" alt=""></a>
-                  </li>
-              </div>
-            </ul>
-          </div>
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <div class="sx">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#"
+                  >Dashboard</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#"
+                  >Centro di Controllo</a
+                >
+              </li>
+            </div>
+            <div class="dx">
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  aria-current="page"
+                  href="https://www.twitch.tv/raspirover"
+                  >Live
+                  <img
+                    src="https://static.twitchcdn.net/assets/favicon-32-e29e246c157142c94346.png"
+                    alt=""
+                /></a>
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  aria-current="page"
+                  href="https://github.com/Rimaro03/esercizioFlaskRobot"
+                  >GitHub
+                  <img
+                    src="https://github.githubassets.com/favicons/favicon.png"
+                    alt=""
+                /></a>
+              </li>
+            </div>
+          </ul>
         </div>
-      </nav>
+      </div>
+    </nav>
     <div class="title">
-        <h1>CONTROL CENTRE</h1>
-    </div>  
-    <div class="container">
-        <div class="buttons">
-            <div class="movementButtons divButtons">
-                <h3 class="buttonDivTitle">MOVIMENTO</h3>
-                <button type="button" class="btn btn-outline-primary" onclick="publish('avanti')">AVANTI</button>
-                <button type="button" class="btn btn-outline-primary" onclick="publish('indietro')">INDIETRO</button>
-            </div>
-            <div class="armButtons divButtons">
-                <h3 class="buttonDivTitle">BRACCIO</h3>
-                <button type="button" class="btn btn-outline-primary" onclick="publish('alza')">ALZA</button>
-                <button type="button" class="btn btn-outline-primary"  onclick="publish('abbassa')">ABBASSA</button>
-            </div>
-            <div class="clampButtons divButtons">
-                <h3 class="buttonDivTitle">MORSA</h3>
-                <button type="button" class="btn btn-outline-primary"  onclick="publish('apri')">APRI</button>
-                <button type="button" class="btn btn-outline-primary"  onclick="publish('chidi')">CHIUDI</button>
-            </div>
-        </div>
+      <h1>CONTROL CENTRE</h1>
     </div>
-
+    <div class="container">
+      <div class="buttons">
+        <div class="movementButtons divButtons">
+          <h3 class="buttonDivTitle">MOVIMENTO</h3>
+          <button
+            type="button"
+            class="btn btn-outline-primary"
+            onclick="publish('avanti')"
+          >
+            AVANTI
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-primary"
+            onclick="publish('indietro')"
+          >
+            INDIETRO
+          </button>
+        </div>
+        <div class="armButtons divButtons">
+          <h3 class="buttonDivTitle">BRACCIO</h3>
+          <button
+            type="button"
+            class="btn btn-outline-primary"
+            onclick="publish('alza')"
+          >
+            ALZA
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-primary"
+            onclick="publish('abbassa')"
+          >
+            ABBASSA
+          </button>
+        </div>
+        <div class="clampButtons divButtons">
+          <h3 class="buttonDivTitle">MORSA</h3>
+          <button
+            type="button"
+            class="btn btn-outline-primary"
+            onclick="publish('apri')"
+          >
+            APRI
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-primary"
+            onclick="publish('chiudi')"
+          >
+            CHIUDI
+          </button>
+        </div>
+      </div>
+    </div>
+    
     <script>
-        var socket = io();
-        const publish = (azione) =>{
-            socket.emit('publish', {message: azione, topic: "rasp1/comandi"})
-        }
+      let socket = io();
+      const publish = (azione) => {
+        socket.emit("publish", { message: azione, topic: "rasp1/comandi" });
+      };
+
+      /*socket.on("video_feed", (data) => {
+        console.log(data["data"]);
+      });*/
+
+      const video = document.querySelector(".img");
+      setInterval(() => {
+        video.src = "../static/image.jpg"
+      }, 0.5);
     </script>
-</body>
+  </body>
 </html>

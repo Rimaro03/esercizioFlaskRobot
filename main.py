@@ -1,8 +1,14 @@
-from flask import Flask, render_template
+from cmath import log
+from msilib.schema import File
+from socket import socket
+from flask import Flask, Response, render_template
 from flask_mqtt import Mqtt
 from flask_socketio import SocketIO
 from dotenv import load_dotenv
 import os
+
+from numpy import imag
+
 
 app = Flask(__name__)
 load_dotenv()
@@ -19,16 +25,14 @@ app.config['MQTT_TLS_ENABLED'] = False
 mqtt = Mqtt(app)
 socketio = SocketIO(app)
 
-
 @app.route('/')
 def index():
     return render_template('controlcentre.html')
 
-
 @socketio.on('publish')
 def handle_publish(json_data):
     mqtt.publish(json_data['topic'], json_data['message'])
-
+    
 
 if __name__ == '__main__':
     socketio.run(app, host='0.0.0.0', port=5000, use_reloader=False, debug=True)
