@@ -38,31 +38,54 @@ def sendResponse():
     dictionary = getData(7)
     emit('response', dictionary)
 
-def getData(limit):
-        cursor = mysql.get_db().cursor()
+@socketio.on('getOggetti')
+def sendResponse():
+    dictionary = getOggetti()
+    emit('responseT', dictionary)
 
-        # Query
-        cursor.execute(''' SELECT Rover.IDRover, Misura.temperatura,Misura.umidita,Misura.timestamp FROM Misura,Rover,Luogo WHERE (Misura.IDRover = Rover.IDRover) 
-        AND (Misura.IDLuogo = Luogo.IDLuogo) AND (Misura.IDRover = 1) ORDER BY Misura.timestamp DESC LIMIT {}'''.format(limit)) 
-        rv = cursor.fetchall()
+def getData(limit):
+    cursor = mysql.get_db().cursor()
+
+    # Query
+    cursor.execute(''' SELECT Rover.IDRover, Misura.temperatura,Misura.umidita,Misura.timestamp FROM Misura,Rover,Luogo WHERE (Misura.IDRover = Rover.IDRover) AND (Misura.IDLuogo = Luogo.IDLuogo) AND (Misura.IDRover = 1) ORDER BY Misura.timestamp DESC LIMIT {}'''.format(limit)) 
+    rv = cursor.fetchall()
     
-        if limit==1:
-            dictionary = {
-            "temp": int(rv[0][1]), 
-            "umi": int(rv[0][2])
+    if limit==1:
+        dictionary = {
+        "temp": int(rv[0][1]), 
+        "umi": int(rv[0][2])
+    }
+    else:
+        dictionary = {}
+        temp = []
+        timestamp = []
+        for i in range(len(rv)):
+            temp.append(int(rv[i][1]))
+            timestamp.append(rv[i][3])
+        dictionary = {
+            "temp": temp, 
+            "timestamp": timestamp
         }
-        else:
-            dictionary = {}
-            temp = []
-            timestamp = []
-            for i in range(len(rv)):
-                temp.append(int(rv[i][1]))
-                timestamp.append(rv[i][3])
-            dictionary = {
-                "temp": temp, 
-                "timestamp": timestamp
-            }
-        return dictionary
+    return dictionary
+
+def getOggetti():
+    cursor = mysql.get_db().cursor()
+    cursor.execute(''' SELECT Nome, count(*) FROM Tronco, Varieta WHERE Varieta.IDVarieta = Tronco.IDVarieta GROUP BY Nome''')
+
+    rv = cursor.fetchall()
+    
+    dictionary = {}
+    varieta = []
+    numero = []
+    for i in range(len(rv)):
+        varieta.append(rv[i][0])
+        numero.append(int(rv[i][1]))
+        dictionary = {
+            "varieta": varieta, 
+            "numero": numero
+        }
+    return dictionary
+
 
 if __name__ == "__main__":
     socketio.run(app, host='0.0.0.0', debug=True, port=4321)

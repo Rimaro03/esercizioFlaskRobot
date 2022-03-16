@@ -124,9 +124,7 @@
           labels.push(
             `${new Date(element).getDate()}/${new Date(element).getMonth() + 1}`
           );
-          console.log(element);
         });
-        console.log(labels);
         const data = {
           labels: labels,
           datasets: [
@@ -152,5 +150,14 @@
         });
       });
     </script>
+
+    <script>
+      socket.emit("getOggetti");
+      socket.on('responseT', function(data) {
+          console.log(data);
+      });
+ 
+    </script>
+
   </body>
 </html>
