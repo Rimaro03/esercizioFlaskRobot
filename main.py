@@ -70,23 +70,25 @@ def getData(limit):
 
 def getOggetti():
     cursor = mysql.get_db().cursor()
-    cursor.execute(''' SELECT Nome, count(*) FROM Tronco, Varieta WHERE Varieta.IDVarieta = Tronco.IDVarieta GROUP BY Nome''')
+    cursor.execute(''' SELECT IDTronco, Nome, Peso FROM Tronco, Varieta WHERE Varieta.IDVarieta = Tronco.IDVarieta GROUP BY IDTronco, Nome, Peso''')
 
     rv = cursor.fetchall()
     
-    dictionary = {}
-    varieta = []
-    numero = []
-    for i in range(len(rv)):
-        varieta.append(rv[i][0])
-        numero.append(int(rv[i][1]))
-        dictionary = {
-            "varieta": varieta, 
-            "numero": numero
-        }
-    return dictionary
+    print(rv)
+
+    tronchi=[]
+    for i in range(0,len(rv)):
+        tronchi.append(
+            {
+                "ID": rv[i][0],
+                "varieta": rv[i][1],
+                "peso": rv[i][2]
+            }
+        )
+    return tronchi
 
 
 if __name__ == "__main__":
     socketio.run(app, host='0.0.0.0', debug=True, port=4321)
+
 

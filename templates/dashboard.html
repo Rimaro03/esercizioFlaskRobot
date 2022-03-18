@@ -70,27 +70,12 @@
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">IdTronco</th>
+            <th scope="col">IDTronco</th>
             <th scope="col">Peso</th>
             <th scope="col">Variteà</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
         </tbody>
       </table>
     </div>
@@ -180,7 +165,26 @@
     <script>
       socket.emit("getOggetti");
       socket.on('responseT', function(data) {
-          console.log(data);
+          let tabella = document.querySelector("tbody")
+          console.log(data.length)
+
+          for(let i=0; i<data.length; i++){
+            let record = document.createElement("tr")
+
+            let element1 = document.createElement("td")
+            element1.innerHTML = data[i].ID
+            record.append(element1)
+
+            let element2 = document.createElement("td")
+            element2.innerHTML = data[i].peso
+            record.append(element2)
+
+            let element3 = document.createElement("td")
+            element3.innerHTML = data[i].varieta
+            record.append(element3)
+
+            tabella.append(record)
+          }
       });
  
     </script>
